@@ -1,0 +1,26 @@
+.Menu-container {
+    padding-top: 10px;
+    background-color: #B7B7B7;
+}
+
+.Menu-container ul li a{
+    color: black;
+    text-decoration: none;
+}
+.Menu-container ul {
+    margin-left: 8px;
+    display: flex;
+    align-items: center;
+}
+.Menu-container ul li {
+    background-color: #D6D6D6;
+    margin-right: 10px;
+    width: 180px;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+    font-size: 26px;
+    list-style: none; 
+}
+.Menu-container ul #entrada {
+    background-color: white;
+}

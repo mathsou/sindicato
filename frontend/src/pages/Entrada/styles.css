@@ -1,0 +1,15 @@
+.Entrada-container section {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Entrada-container section label{
+    margin: 8px;
+    font-size: 24px;
+}
+
+.Entrada-container section input {
+    height: 36px;
+}
