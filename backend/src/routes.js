@@ -2,23 +2,17 @@ const express = require('express');
 const routes = express.Router();
 const connection = require('./database/connection');
 
-const pessoaController = require('./controllers/pessoaController');
-const modalidadeController = require('./controllers/modalidadeController');
-const descontoController = require('./controllers/descontoController');
-const praticaModalidadeController = require('./controllers/praticaModalidadeController');
+const sociosController = require('./controllers/sociosController');
+const agendamentoController = require('./controllers/agendamentoController');
+const eventosController = require('./controllers/eventosController');
 
-routes.post('/cadastro', pessoaController.create);
-routes.post('/modalidade', modalidadeController.create);
-routes.post('/desconto', descontoController.create);
-routes.post('/praticaModalidade', praticaModalidadeController.create);
+routes.post('/socios', sociosController.create);
+routes.post('/agendamento', agendamentoController.create);
+routes.post('/eventos', eventosController.create);
 
-routes.get('/cadastro', pessoaController.index);
-routes.get('/modalidade', modalidadeController.index);
-routes.get('/desconto', descontoController.index);
-routes.get('/praticaModalidade', praticaModalidadeController.index);
+routes.get('/socios', sociosController.index);
+routes.get('/agendamento', agendamentoController.index);
+routes.get('/eventos', eventosController.index);
 
-routes.put('/modalidade', modalidadeController.modify);
-
-routes.delete('/praticaModalidade', praticaModalidadeController.delete);
 
 module.exports = routes;
