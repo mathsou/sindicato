@@ -6,7 +6,7 @@ module.exports = {
         const {id} = request.params;
 
         if(id){
-            const agendamentos = await connection('agendamento')
+            const agendamentos = await connection('agendamentos')
             .select('*')
             .where('idAgend', '=', id)
             .first();
@@ -14,18 +14,18 @@ module.exports = {
             return response.json(agendamentos);
         }
         
-        const socios = await connection('socios')
-        .select('*')
-        .orderBy('nome');
+        const agendamentos = await connection('agendamentos')
+        .select('*');
 
-        return response.json(socios)
+
+        return response.json(agendamentos)
     },
 
 
     async create(request, response){
         const data = request.body; 
 
-            await connection('socios').insert({
+            await connection('agendamentos').insert({
                 socioId: data.socioId,
                 dataHoraInicial: data.dataHoraInicial,
                 dataHoraFinal: data.dataHoraFinal,

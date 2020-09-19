@@ -4,15 +4,14 @@ import './styles.css';
 import Cabecalho from '../Cabecalho';
 import Menu from '../Menu';
 
-export default function Entrada(){
-    localStorage.setItem('pag', 1);
+export default function Socios(){
+    localStorage.setItem('pag',2);
     return (
-        <div className="Entrada-container">
+        <div className="Socio-container">
             <Cabecalho/>
             <Menu/>
             <section>
-                <label name="codigo">Código</label>
-                <input type="text" name="codigo"></input>
+                
             </section>
         </div>
     );
