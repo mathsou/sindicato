@@ -26,18 +26,11 @@ export default function Menu(){
             <ul id="menu-principal">
                 <li id="entrada"><Link to="/">Entrada</Link></li>
                 <li id="socios">
-                    <Link>Socios</Link>
-                    <ul className="sub-menu">
-                        <li><Link to="socios">Consultar</Link></li>
-                        <li><Link>Novo</Link></li>
-                    </ul>
+                    <Link to="socios">Socios</Link>
                 </li>
                 <li id="agendamento">
                     <Link to="agendamento">Agendamentos</Link>
-                    <ul>
-                        <li><Link>teste1</Link></li>
-                        <li><Link>teste2</Link></li>
-                    </ul>
+                    
                 </li>
             </ul>
         </div>

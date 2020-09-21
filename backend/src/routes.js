@@ -12,6 +12,7 @@ routes.post('/eventos', eventosController.create);
 
 routes.get('/socios', sociosController.index);
 routes.get('/agendamento', agendamentoController.index);
+routes.get('/agendamento/:id', agendamentoController.index);
 routes.get('/eventos', eventosController.index);
 
 

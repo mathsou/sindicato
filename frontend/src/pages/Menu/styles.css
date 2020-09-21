@@ -23,6 +23,10 @@
     color: #3447b3;
 }
 
+.Menu-container a:hover{
+    background-color: rgb(134, 134, 134);
+}
+
 .Menu-container ul ul{
     position: absolute;
     visibility: hidden;

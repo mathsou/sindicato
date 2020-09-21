@@ -7,7 +7,13 @@ module.exports = {
 
         if(id){
             const agendamentos = await connection('agendamentos')
-            .select('*')
+            .join('socios', 'agendamentos.socioId', '=', 'socios.idSocio')
+            .join('eventos', 'agendamentos.eventoId', '=', 'eventos.idEvento')
+            .select([
+                'agendamentos.*',
+                'socios.nome',
+                'eventos.evento'
+            ])
             .where('idAgend', '=', id)
             .first();
             
@@ -15,7 +21,11 @@ module.exports = {
         }
         
         const agendamentos = await connection('agendamentos')
-        .select('*');
+        .join('socios', 'agendamentos.socioId', '=', 'socios.idSocio')
+        .select([
+            'agendamentos.*',
+            'socios.nome'
+        ]);
 
 
         return response.json(agendamentos)
@@ -26,12 +36,13 @@ module.exports = {
         const data = request.body; 
 
             await connection('agendamentos').insert({
+                descricao: data.descricao,
                 socioId: data.socioId,
                 dataHoraInicial: data.dataHoraInicial,
                 dataHoraFinal: data.dataHoraFinal,
                 observacao: data.observacao,
                 valor: data.valor,
-                eventoId: data.eventoId,
+                eventoId: data.eventoId
                
 
             })
