@@ -78,7 +78,7 @@ module.exports = {
 
 			`
 		
-			pdf.create(documento, {}).toFile("./teste.pdf", (err, res) => {
+			pdf.create(documento, {}).toFile("../contrato.pdf", (err, res) => {
 				if(err){
 					console.log("ERRO");
 				}
