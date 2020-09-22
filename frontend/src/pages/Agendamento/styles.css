@@ -98,7 +98,40 @@
 
 .boxConsulta #info h3 {
     font-size: 26px;
-    color: rgb(80, 80, 202);
+    color: #5050CA;
     margin-left: 10px;
     text-align: left;
+}
+
+.boxConsulta #info #pdf {
+    position: absolute;
+    cursor: pointer;
+    top: 8px;
+    right: 10px;   
+}
+
+.boxConsulta #info #pdf:hover {
+    opacity: 0.6; 
+}
+
+.boxConsulta #info #edit {
+    position: absolute;
+    cursor: pointer;
+    top: 8px;
+    right: 36px;   
+}
+
+.boxConsulta #info #edit:hover {
+    opacity: 0.6;   
+}
+
+.boxConsulta #info #delete {
+    position: absolute;
+    cursor: pointer;
+    top: 8px;
+    right: 64px;   
+}
+
+.boxConsulta #info #delete:hover {
+    opacity: 0.6;  
 }

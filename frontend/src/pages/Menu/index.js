@@ -24,7 +24,7 @@ export default function Menu(){
     return (
         <div className="Menu-container">
             <ul id="menu-principal">
-                <li id="entrada"><Link to="/">Entrada</Link></li>
+                <li id="entrada"><Link to="/">Início</Link></li>
                 <li id="socios">
                     <Link to="socios">Socios</Link>
                 </li>

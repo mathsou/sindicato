@@ -11,8 +11,7 @@ export default function Entrada(){
             <Cabecalho/>
             <Menu/>
             <section>
-                <label name="codigo">Código</label>
-                <input type="text" name="codigo"></input>
+                
             </section>
         </div>
     );

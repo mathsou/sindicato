@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import {useState} from 'react';
+import {FiFileText, FiEdit, FiTrash2} from 'react-icons/fi';
 import {Link} from 'react-router-dom';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -33,6 +34,7 @@ export default function Agendamento () {
     const[observacao, setObservacao] = useState();
     const[valor, setValor] = useState();
     const[eventoId, setEventoId] = useState();
+    const [matricula, setMatricula] = useState();
     const [socio, setSocio] = useState();
     const [evento, setEvento] = useState();
 
@@ -89,6 +91,7 @@ export default function Agendamento () {
             setObservacao(response.data.observacao);
             setValor(response.data.valor);
             setEventoId(response.data.eventoId);
+            setMatricula(response.data.matricula);
             setSocio(response.data.nome);
             setEvento(response.data.evento);
         })
@@ -115,11 +118,15 @@ export default function Agendamento () {
                 
             }
             catch (err){
-                alert('Erro!');
+                
             }
         }
         modalCadastroFechar()
     }   
+    
+    async function handlePdf(){
+        await api.post('pdf', {matricula, socio, evento, dataHoraInicial, valor});
+    }
 
     return (
         <div id="Agendamento-Container">
@@ -232,6 +239,11 @@ export default function Agendamento () {
                         }}}
                     >   <h1>Evento</h1>
                         <div id="info">
+                            
+                            <FiFileText id="pdf" size={20} color=" #5050CA" onClick={handlePdf}/>
+                            <FiEdit id="edit" size={20} color=" #5050CA"/>
+                            <FiTrash2 id="delete" size={20} color=" #5050CA" />
+                            <h2>Matrícula: </h2><h3>{matricula}</h3>
                             <h2>Sócio: </h2><h3>{socio}</h3>
                             <h2>Inicio: </h2><h3>{dataHoraInicial}</h3>
                             <h2>Fim: </h2><h3>{dataHoraFinal}</h3>

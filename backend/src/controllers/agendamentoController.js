@@ -11,6 +11,7 @@ module.exports = {
             .join('eventos', 'agendamentos.eventoId', '=', 'eventos.idEvento')
             .select([
                 'agendamentos.*',
+                'socios.matricula',
                 'socios.nome',
                 'eventos.evento'
             ])
