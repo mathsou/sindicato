@@ -1,5 +1,4 @@
-
-#Agendamento-Container section {
+.Agendamento-Container section {
     margin: 2% 20% 5% 20%;
     text-align: center;
 
@@ -21,7 +20,6 @@
 }
 
 .boxConsulta {
-
     position: absolute;
     width: 90%;
     height: 89%;
@@ -34,7 +32,22 @@
 
 }
 
-#Agendamento-Container section .botao {
+.boxCadastro form {
+    height: 92%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.calendario .fc-direction-ltr, .fc-theme-standard button {
+    width: 60px;
+}
+
+.boxCadastro form #diaN {
+    color: red;
+}
+
+.Agendamento-Container section .botao {
     border: none;
     background-color: rgb(39, 93, 173);
     border-radius: 5px;
@@ -44,12 +57,12 @@
     color: white;
 }
 
-#Agendamento-Container section .botao:hover {
+.Agendamento-Container section .botao:hover {
     background-color: rgb(134, 134, 134);
     color:black;
 }
 
-#observacao {
+.boxCadastro form #observacao {
     height: 110px;
     padding: 5px;
     text-align: left;
@@ -58,13 +71,22 @@
 }
 
 .boxCadastro form input, select, textarea, .submit {
-    margin: 20px;
+    margin: auto;
     width: 300px;
-    height: 40px;
+    height: 35px;
     border-radius: 10px;
     border: solid black 1px;
     text-align: center;
-    font-size: 20px;
+    font-size: 18px;
+}
+.boxCadastro label {
+    font-size: 22px;
+}
+
+.boxCadastro #festaGrande {
+    margin: 10px;
+    width: 20px;
+    height: 20px;
 }
 
 .boxCadastro .submit {

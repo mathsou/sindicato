@@ -5,7 +5,7 @@ import Cabecalho from '../Cabecalho';
 import Menu from '../Menu';
 
 export default function Entrada(){
-    localStorage.setItem('pag', 1);
+    localStorage.setItem('pag', '1');
     return (
         <div className="Entrada-container">
             <Cabecalho/>

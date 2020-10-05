@@ -1,0 +1,264 @@
+/* .Socio-container section {
+    text-align: center;
+} */
+/* .Socio-container section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+} */
+
+.Socio-container section .listagemSocios #pesquisa {
+    text-align: right;
+    height: 80px;
+}
+.Socio-container section .listagemSocios  #pesquisa #pesquisar {
+    margin-top: 20px;
+    margin-right: 20px;
+    height: 28px;
+    width: 210px;
+    font-size: 12px;
+}
+
+.Socio-container section .listagemSocios #pesquisa svg {
+    position: absolute;
+    right: 55px;
+    margin-top: -7px;
+    cursor: pointer;
+}
+
+.Socio-container section .formSocio {
+    background-color: rgb(140, 194, 204);
+    margin: 30px 0px 15px 30px;
+    padding: 25px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 680px;
+    width: 40%;
+    min-width: 500px;
+    max-width: 600px;
+    float: left;
+}
+.Socio-container {
+    width: 100%;
+}
+
+.Socio-container section {
+    width: 100%;
+}
+
+.Socio-container section .listagemSocios {
+    background-color: rgb(140, 194, 204);
+    border-radius: 10px;
+    margin: 30px 30px 15px 5px;
+    height: 680px;
+    width: 50%;
+    min-width: 565px;
+    
+    float: right;
+
+}
+
+.Socio-container section .formSocio input, .select, button {
+    margin: auto;
+    margin-bottom: 15px;
+    height: 35px;
+    width: 260px;
+    border-radius: 10px;
+    border: solid black 1px;
+    text-align: center;
+    font-size: 18px;
+    
+}
+
+.Socio-container section .formSocio label {
+    text-align: right;
+    margin-right: 15px;
+    font-size: 20px;
+
+}
+
+.formSocio #socioN, #sexo {
+    margin-bottom: 10px;
+}
+
+.formSocio .submit {
+    border: 0;
+    margin-left: -50%;
+    margin-top: 10px;
+    background-color: rgb(39, 93, 173);
+    color: white;
+}
+
+.formSocio #limpar {
+   cursor: pointer;
+   color: rgb(34, 79, 148);
+   font-weight: 700;
+   position: relative;
+   right: 0px;
+   top: 20px;
+}
+
+.formSocio #limpar:hover{
+    opacity: 0.8;
+}
+
+.formSocio .submit:hover {
+    background-color: rgb(134, 134, 134);
+    color:black;
+}
+
+.Socio-container section .listagemSocios #tabela {
+    background: #C4C4C4;
+    width: 98%;
+    padding-left: 5px;
+    margin-right: 15px;
+    margin-left: 10px;
+    
+}
+
+
+.Socio-container section .listagemSocios #tabela table {
+    text-align: center;
+    width: 100%;
+    font-family: Roboto, sans-serif;
+    margin: 0;  
+ 
+}
+
+.Socio-container section .listagemSocios #tabela table #cabecalho {
+    width: 100%;
+}
+
+.Socio-container section .listagemSocios #tabela table #cabecalho tr{
+    width: 100%;
+}
+
+.Socio-container section .listagemSocios #tabela table #cabecalho tr td{
+    text-align: left;
+}
+
+.Socio-container section .listagemSocios #tabela table #cabecalho tr td + td{
+    width: 20%;
+    text-align: left;
+}
+
+.Socio-container section .listagemSocios #tabela table #cabecalho tr td + td + td{
+    width: 78%;
+    text-align: left;
+}
+
+
+.Socio-container section .listagemSocios #tabela table .corpo1{
+    width: 100%;
+}
+
+.Socio-container section .listagemSocios #tabela table .corpo1 .socio{
+    width: 100%;
+}
+
+.Socio-container section .listagemSocios #tabela table .corpo1 .socio td + td + td{
+    width: 80%;
+    text-align: left;
+}
+
+.Socio-container section .listagemSocios #tabela table .corpo1 .socio td{
+    align-items: center;
+    text-align: left;
+    color: #0e0592;
+}
+
+.Socio-container section .listagemSocios #tabela table .corpo1 .socio td svg{
+    cursor: pointer;
+}
+
+.Socio-container section .listagemSocios #tabela table .corpo1 .socio td svg:hover{
+    opacity: 0.6;
+}
+
+.Socio-container section .listagemSocios #tabela table .corpo1 .socio td + td{
+    width: 20%;
+    text-align: left;
+}
+
+.Socio-container section .listagemSocios #tabela table .corpo1 .socio td + td + td{
+    width: 80%;
+    text-align: left;
+}
+
+/* .Socio-container section .listagemSocios #tabela table .corpo1 .socio td {
+    padding-top: 10px;
+} */
+.Socio-container section .listagemSocios #tabela .tabInfo{
+    width: 100%;
+}
+
+.Socio-container section .listagemSocios #tabela .tabInfo table{
+    width: 100%;
+}
+
+.Socio-container section .listagemSocios #tabela .tabInfo table .corpo2{
+    width: 100%;
+}
+
+.Socio-container section .listagemSocios #tabela .tabInfo table .corpo2 .dadosSocio, .dado{
+    width: 100%;
+}
+.Socio-container section .listagemSocios #tabela .tabInfo table .corpo2 .dadosSocio td{
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.Socio-container section .listagemSocios #tabela .tabInfo table .corpo2 .dadosocio {
+    width: 7%;
+}
+
+.Socio-container section .listagemSocios #tabela .tabInfo table .corpo2 .dadonascimento {
+    width: 14%;
+}
+
+.Socio-container section .listagemSocios #tabela .tabInfo table .corpo2 .dadoemail {
+    width: 46%;
+}
+
+.Socio-container section .listagemSocios #tabela .tabInfo table .corpo2 .dadocep {
+    width: 12%;
+}
+
+.Socio-container section .listagemSocios #tabela .tabInfo table .corpo2 .dadocelular {
+    width: 19%;
+}
+
+.Socio-container section .listagemSocios #tabela .tabInfo table .corpo2 .dadotelcomercial {
+    width: 19%;
+}
+.Socio-container section .listagemSocios #tabela .tabInfo table .corpo2 .dadotelresidencial {
+    width: 19%;
+}
+
+.Socio-container section .listagemSocios #tabela .tabInfo table .corpo2 .dadosexo {
+    width: 12%;
+}
+
+.Socio-container section .listagemSocios #tabela .tabInfo table .corpo2 td{
+    font-size: 12px;
+    text-align: center;
+}
+
+.Socio-container section .listagemSocios #tabela table #cabecalho td {
+    font-size: 18px;
+    padding-bottom: 10px;
+    font-weight: 700; 
+}
+
+/* .Socio-container section .listagemSocios #tabela table:first-child {
+    padding-top: 10px;
+     
+} */
+
+.Socio-container section .listagemSocios #tabela table tr td {
+    width: 400px;
+    font-size: 14px;
+    text-align: center;
+}

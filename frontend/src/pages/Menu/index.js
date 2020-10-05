@@ -10,13 +10,13 @@ export default function Menu(){
         document.getElementById("socios").style.background = "#222222"
         document.getElementById("agendamento").style.background = "#222222"
 
-        if(pag == 1){
+        if(pag === '1'){
             document.getElementById("entrada").style.background = "#d6d4d4"
         }
-        else if (pag == 2){
+        else if (pag === '2'){
             document.getElementById("socios").style.background = "#d6d4d4"
         }
-        else if (pag == 3){
+        else if (pag === '3'){
             document.getElementById("agendamento").style.background = "#d6d4d4"
         }
     }, [pag])

@@ -2,10 +2,12 @@ exports.up = function(knex) {
     return knex.schema.createTable('agendamentos', function(table){
       table.integer('idAgend').primary();
       table.string('socioId').notNullable();
-      table.datetime('dataHoraInicial', {precision: 6}).notNullable();
-      table.datetime('dataHoraFinal', {precision: 6}).notNullable();
+      table.date('data', {precision: 6}).notNullable();
+      table.integer('salao').notNullable();
       table.string('observacao');
-      table.float('valor').notNullable();
+      table.float('valorTotal').notNullable();
+      table.float('valorSinal').notNullable();
+      table.float('valorRestante').notNullable();
       table.integer('eventoId').notNullable();
 
       table.foreign('eventoId').references('idEvento').inTable('eventos').onDelete('CASCADE').onUpdate('CASCADE');

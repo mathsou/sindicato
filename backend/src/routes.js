@@ -13,9 +13,14 @@ routes.post('/eventos', eventosController.create);
 routes.post('/pdf',pdfController.create);
 
 routes.get('/socios', sociosController.index);
+routes.get('/socios/:id', sociosController.index);
 routes.get('/agendamento', agendamentoController.index);
 routes.get('/agendamento/:id', agendamentoController.index);
 routes.get('/eventos', eventosController.index);
+
+routes.delete('/socios/:id', sociosController.delete);
+
+routes.put('/socios', sociosController.update);
 
 
 module.exports = routes;

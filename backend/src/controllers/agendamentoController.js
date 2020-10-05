@@ -37,12 +37,13 @@ module.exports = {
         const data = request.body; 
 
             await connection('agendamentos').insert({
-                descricao: data.descricao,
                 socioId: data.socioId,
-                dataHoraInicial: data.dataHoraInicial,
-                dataHoraFinal: data.dataHoraFinal,
+                data: data.data,
+                salao: data.salao,
                 observacao: data.observacao,
-                valor: data.valor,
+                valorTotal: data.valorTotal,
+                valorSinal: data.valorSinal,
+                valorRestante: data.valorRestante,
                 eventoId: data.eventoId
                
 

@@ -1,10 +1,8 @@
 import React, {useEffect} from 'react';
 import {useState} from 'react';
 import {FiFileText, FiEdit, FiTrash2} from 'react-icons/fi';
-import {Link} from 'react-router-dom';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import Modal from 'react-modal';
 
@@ -18,21 +16,24 @@ import Menu from '../Menu';
 Modal.setAppElement('#root');
 
 export default function Agendamento () {
-    localStorage.setItem('pag', 3);
+    localStorage.setItem('pag', '3');
     
     const [modalIsOpenCad, setModalIsOpenCad] = useState(false);
     const [modalIsOpenEvent, setModalIsOpenEvent] = useState(false);
+    const [salvar, setSalvar] = useState(false);
 
     const [agendamento, setAgendamento] = useState([]);
     const [socios, setSocios] = useState([]);
     const [eventos, setEventos] = useState([]);
 
-    const [idAgend, setIdAgend] = useState();
+    //const [idAgend, setIdAgend] = useState();
     const[socioId, setSocioId] = useState();
-    const[dataHoraInicial, setDataHoraInicial] = useState();
-    const[dataHoraFinal, setDataHoraFinal] = useState();
+    const[data, setData] = useState();
+    const[salao, setSalao] = useState();
     const[observacao, setObservacao] = useState();
-    const[valor, setValor] = useState();
+    const[valorTotal, setValorTotal] = useState();
+    const[valorSinal, setValorSinal] = useState();
+    const[valorRestante, setValorRestante] = useState();
     const[eventoId, setEventoId] = useState();
     const [matricula, setMatricula] = useState();
     const [socio, setSocio] = useState();
@@ -44,7 +45,7 @@ export default function Agendamento () {
         api.get('agendamento')
         .then(response => {
             setAgendamento(response.data.map(agend => (
-                {id:agend.idAgend , title: agend.nome, start: agend.dataHoraInicial, end: agend.dataHoraFinal} 
+                agend.salao===1 ? {id:agend.idAgend , title: agend.nome, date: agend.data, color: 'blue', salao: agend.salao} : {id:agend.idAgend , title: agend.nome, date: agend.data, color: 'green', salao: agend.salao}
             ))) 
     })
         api.get('socios')
@@ -58,7 +59,34 @@ export default function Agendamento () {
         })
     }, [modalIsOpenCad])    
 
-    function modalCadastroAbrir() {
+    function validaEvento(){
+        var agendado=false
+        if (data){
+            agendamento.map(agend => {
+                data===agend.date ? agendado=agend.salao : console.log('false')
+                return 0
+            })
+        }
+        console.log(agendado)
+        if(agendado){
+            if (agendado===salao) {
+                document.getElementById("diaN").style.display = 'block';
+                setSalvar(false)
+            }
+            else {
+                document.getElementById("diaN").style.display = 'none';
+                setSalvar(true)
+            }
+        }
+        else{
+            setSalvar(false)
+        }
+    }
+
+    function modalCadastroAbrir(data) {
+
+        setData(data)
+
         setModalIsOpenCad(true);
         document.getElementById('calendario').style.visibility = "hidden";
     }
@@ -66,30 +94,27 @@ export default function Agendamento () {
     function modalCadastroFechar() {
         setModalIsOpenCad(false);
         setModalIsOpenEvent(false);
-        setIdAgend(null);
         document.getElementById('calendario').style.visibility = "visible";
         setSocioId('');
-        setDataHoraInicial('');
-        setDataHoraFinal('');
+        setData('');
+        setSalao('');
         setObservacao('');
-        setValor('');
+        setValorTotal('');
+        setValorSinal('');
+        setValorRestante('');
         setEventoId('');
     }
-    useEffect(() => {
-        if(idAgend){
-            
-        }
-        
-    }, [])
     function modalMostrarEvento(id){
         
         api.get(`agendamento/${id}`)
         .then(response => {
             setSocioId(response.data.socioId);
-            setDataHoraInicial(response.data.dataHoraInicial);
-            setDataHoraFinal(response.data.dataHoraFinal);
+            setData(response.data.data);
+            setSalao(response.data.salao);
             setObservacao(response.data.observacao);
-            setValor(response.data.valor);
+            setValorTotal(response.data.valorTotal);
+            setValorSinal(response.data.valorSinal);
+            setValorRestante(response.data.valorRestante);
             setEventoId(response.data.eventoId);
             setMatricula(response.data.matricula);
             setSocio(response.data.nome);
@@ -101,18 +126,22 @@ export default function Agendamento () {
 
     async function handleCadastrar(e){
         e.preventDefault();
-        var valorFinal = mask.removeMascara(valor);
-       if(socioId !== '0' && eventoId !== '0'){
-        const data = {
+        var valorFinal = mask.removeMascara(valorTotal);
+        var valorS = mask.removeMascara(valorSinal);
+        var valorR = mask.removeMascara(valorRestante);
+       if(socioId !== '0' && eventoId !== '0' && salvar){
+        const dados = {
             socioId,
-            dataHoraInicial,
-            dataHoraFinal,
+            data,
+            salao,
             observacao,
-            valor: valorFinal,
+            valorTotal: valorFinal,
+            valorSinal: valorS,
+            valorRestante: valorR,
             eventoId
        };
             try {
-                await api.post('agendamento', data);
+                await api.post('agendamento', dados);
                 alert("Agendamento criado com sucesso!");
                 document.getElementById('formAgendamento').onSubmit()
                 
@@ -125,38 +154,33 @@ export default function Agendamento () {
     }   
     
     async function handlePdf(){
-        await api.post('pdf', {matricula, socio, evento, dataHoraInicial, valor});
+        await api.post('pdf', {matricula, socio, evento, data, valorTotal, valorSinal, valorRestante});
     }
 
     return (
-        <div id="Agendamento-Container">
+        <div className="Agendamento-Container">
     
             <Cabecalho/>
             <Menu/>
             <section>
-                <button className="botao" onClick={modalCadastroAbrir}>Novo Evento</button>
                 <div id="calendario">
                 <FullCalendar 
-                    plugins={[ dayGridPlugin, interactionPlugin, timeGridPlugin ]}
-                    initialView="timeGridWeek"
-                   // dateClick={handleDateClick}
+                    plugins={[ dayGridPlugin, interactionPlugin]}
+                    initialView="dayGridMonth"
                     locale={'pt-br'}
                     dayHeaderFormat={{weekday: 'long'}}
                     editable={true}
-                    height={1155}  
                     key="calendario"
-                    events={agendamento
-                        
-                        // [
-                        // { title: 'Festa Aniversário', start: '2020-09-21T10:00:00', end: '2020-09-21T16:00:00'},
-                        // { title: 'Festa Aniversário', start: '2020-09-22T22:00:00', end: '2020-09-23T01:00:00'},
-                        // ]
-                }
+                    events={agendamento}
+                    dateClick={(info) => {
+                        modalCadastroAbrir(info.dateStr)
+                    }}
                     eventClick={(info) => {
                         modalMostrarEvento(info.event.id)
                         // setIdAgend(info.event.id)
                         info.el.style.borderColor = 'red';
                     }}
+                    
                     
                     
                 />
@@ -180,51 +204,85 @@ export default function Agendamento () {
                             </option>
                             {socios.map(socio => (
                             <option
+                                key={socio.idSocio}
                                 value={socio.idSocio}                                    
                             >
                                 {socio.nome}
                             </option>))}
-                        </select><br/>
+                        </select>
                         <input 
-                            type="datetime-local" 
-                            id="dataHoraInicial" 
-                            value={dataHoraInicial}
-                            onChange={e => setDataHoraInicial(e.target.value)}
+                            type="date" 
+                            id="data" 
+                            value={data}
+                            onChange={e => setData(e.target.value)}
+                            onBlur={validaEvento}
                             required
-                        /><br/>
-                        <input 
-                            type="datetime-local" 
-                            id="dataHoraFinal" 
-                            value={dataHoraFinal}
-                            onChange={e => setDataHoraFinal(e.target.value)}
-                            required
-                        /><br/>
+                        />
+                        <select 
+                            onChange={e => setSalao(e.target.value)}
+                            onClick={validaEvento}
+                        >
+                            <option value={'0'}>
+                                Selecione o salão
+                            </option>
+                            <option value={'1'}>
+                                Salão Grande
+                            </option>
+                            <option value={'2'}>
+                                Salão Pequeno
+                            </option>
+                        </select>
+                        <p id="diaN" style={{display: 'none'}}>Dia indisponível</p>
                         <textarea 
-                            
                             id="observacao" 
+                            placeholder="Observação"
                             value={observacao}
                             onChange={e => setObservacao(e.target.value)}
-                        /><br/>
+                        />
                         <input 
                             type="text" 
-                            id="valor" 
-                            placeholder="Valor"
-                            value={valor}
-                            onChange={e => setValor(e.target.value)}
-                            onKeyUp={() => {setValor(document.forms[0].valor.value = mask.mascaraDinheiro(valor))}}
+                            id="valorTotal" 
+                            placeholder="Valor Total"
+                            value={valorTotal}
+                            onChange={e => setValorTotal(e.target.value)}
+                            onKeyUp={() => {setValorTotal(document.forms[0].valorTotal.value = mask.mascaraDinheiro(valorTotal))}}
                             required
-                        /><br/>
+                        />
+                        <input 
+                            type="text" 
+                            id="valorSinal" 
+                            placeholder="Valor do Sinal"
+                            value={valorSinal}
+                            onChange={e => setValorSinal(e.target.value)}
+                            onKeyUp={() => {setValorSinal(document.forms[0].valorTotal.value = mask.mascaraDinheiro(valorSinal))}}
+                            required
+                        />
+                        <input 
+                            type="text" 
+                            id="valorRestante" 
+                            placeholder="Valor Restante"
+                            value={valorRestante}
+                            onChange={e => setValorRestante(e.target.value)}
+                            onKeyUp={() => {setValorRestante(document.forms[0].valorTotal.value = mask.mascaraDinheiro(valorRestante))}}
+                            required
+                        />
                         <select onChange={e => setEventoId(e.target.value)}>
                             <option value={'0'}>
                                 Selecione o tipo de Evento
                             </option>
                             {eventos.map(evento => (
                             <option
+                                key={evento.idEvento}
                                 value={evento.idEvento}                                    
                             >
                                 {evento.evento}
                             </option>))}
-                        </select><br/>
+                        </select>
+                        <input
+                        id="festaGrande"
+                        type="checkbox"
+                        />
+                        <label>Festa Grande</label>
                         <button className="submit" type="submit">Salvar</button> 
                     </form>                  
                 </Modal>
@@ -245,10 +303,11 @@ export default function Agendamento () {
                             <FiTrash2 id="delete" size={20} color=" #5050CA" />
                             <h2>Matrícula: </h2><h3>{matricula}</h3>
                             <h2>Sócio: </h2><h3>{socio}</h3>
-                            <h2>Inicio: </h2><h3>{dataHoraInicial}</h3>
-                            <h2>Fim: </h2><h3>{dataHoraFinal}</h3>
+                            <h2>Inicio: </h2><h3>{data}</h3>
                             <h2>Observação: </h2><h3>{observacao}</h3>
-                            <h2>Valor: </h2><h3>{mask.mascaraDinheiro(valor*100)}</h3>
+                            <h2>Valor Total: </h2><h3>{mask.mascaraDinheiro(valorTotal*100)}</h3>
+                            <h2>Valor Sinal: </h2><h3>{mask.mascaraDinheiro(valorSinal*100)}</h3>
+                            <h2>Valor Restante: </h2><h3>{mask.mascaraDinheiro(valorRestante*100)}</h3>
                             <h2>Tipo de Evento: </h2><h3>{evento}</h3>
 
                         </div>
