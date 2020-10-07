@@ -6,7 +6,9 @@
     align-items: center;
     justify-content: space-between;
 } */
-
+.listagemSocios, .formSocio{
+    margin-bottom: 20px;
+}
 .Socio-container section .listagemSocios #pesquisa {
     text-align: right;
     height: 80px;
@@ -107,7 +109,6 @@
     background-color: rgb(134, 134, 134);
     color:black;
 }
-
 .Socio-container section .listagemSocios #tabela {
     background: #C4C4C4;
     width: 98%;
@@ -261,4 +262,31 @@
     width: 400px;
     font-size: 14px;
     text-align: center;
+}
+
+
+.Socio-container section .listagemSocios nav ul{
+    list-style: none;
+    margin-left: 5px;
+
+    
+}
+
+.Socio-container section .listagemSocios nav ul li {
+    padding: 12px 1px 0 1px;
+    float: left;
+}
+.Socio-container section .listagemSocios nav ul li button{
+    font-size: 20px;
+    text-decoration: none;
+    background-color: transparent;
+    width: 40px;
+    color: rgb(13, 71, 109);
+    border: 1px solid rgb(85, 85, 85);
+    border-radius: 0;
+    padding: 5px 10px 5px 10px;
+}
+
+.Socio-container section .listagemSocios nav ul li button:hover{
+    background-color: rgba(194, 193, 193, 0.3);
 }

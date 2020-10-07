@@ -1,11 +1,15 @@
 .Cabecalho-container {
     padding: 35px;
-    background-color: #4fb8e9;
-
+    background-color: #1fa7a0;
 }
 
 .Cabecalho-container h1 {
     text-align: center;
-    font-size: 48px;
-    
+    font-family: arial black;
+    font-size: 48px;    
+}
+
+.Cabecalho-container img {
+    top: 5px;
+    position: absolute;
 }

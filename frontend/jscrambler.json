@@ -1,0 +1,28 @@
+{
+  "keys": {
+    "accessKey": "DCD83923B26EEA357F274341EF9A33B895D2C340",
+    "secretKey": "10069C757DAA6F376212434FF85CCE5B8A158029"
+  },
+  "applicationId": "5f7b5910906f330016d25034",
+  "params": [
+    {
+      "name": "identifiersRenaming"
+    },
+    {
+      "name": "whitespaceRemoval"
+    },
+    {
+      "options": {
+        "mode": []
+      },
+      "name": "duplicateLiteralsRemoval"
+    }
+  ],
+  "areSubscribersOrdered": false,
+  "useRecommendedOrder": true,
+  "jscramblerVersion": "6.3",
+  "tolerateMinification": true,
+  "profilingDataMode": "off",
+  "useAppClassification": true,
+  "browsers": {}
+}

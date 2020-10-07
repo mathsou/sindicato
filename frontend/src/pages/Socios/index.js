@@ -8,8 +8,12 @@ import Menu from '../Menu';
 
 export default function Socios(){
     localStorage.setItem('pag', '2');
+
+    //const [loading, setLoading] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const postsPerPage = 15;
+
     const [mostrar, setMostrar] = useState(true);
-    const [atualiza, setAtualiza] = useState(true);
 
     const [socios, setSocios] = useState([]);
     
@@ -28,16 +32,36 @@ export default function Socios(){
     const [sexo, setSexo] = useState();
 
     useEffect(() => {
-        api.get('socios')
-            .then(response => {
-                if(response.data.length){
-                    setSocios(response.data);
-                }
-                else{
-                    setSocios([response.data]);
-                }
-        })
-    }, [atualiza])
+        const fetchPosts = async () => {
+            //setLoading(true);
+            const response = await api.get('socios');
+            if(response.data.length){
+                setSocios(response.data);
+            }
+            else{
+                setSocios([response.data]);
+            }
+            //setLoading(false);
+            console.log(response.data)
+        } 
+        fetchPosts();
+    }, [])
+
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const paginaSocios = socios.slice(indexOfFirstPost, indexOfLastPost);
+    const PageNumbers = [];
+    
+    for(let i=1; i <= Math.ceil(socios.length / postsPerPage); i++){
+        PageNumbers.push(i);
+    }
+    function mudarPagina(number){
+        setCurrentPage(number);
+        for(let i=1; i<=PageNumbers.length; i++){
+            document.getElementById(`page${i}`).style.backgroundColor = "rgba(0,0,0,0)";
+        }
+        document.getElementById(`page${number}`).style.backgroundColor = "rgba(0,0,150,0.2)";
+    }
 
     function info(id){
         if(mostrar){
@@ -56,7 +80,6 @@ export default function Socios(){
     }
     async function handleCadastrar(e){
         e.preventDefault();
-        console.log(socioN, sexo);
         const dados = {
             idSocio,
             matricula,
@@ -73,18 +96,14 @@ export default function Socios(){
             sexo
         };
         if(socioN !== '0' && sexo !== '0'){
-            console.log(idSocio);
             if(idSocio){
-                console.log("teste")
                 await api.put('socios', dados);
-                setAtualiza(!atualiza);
                 limpar()
                 alert("Dados do sócio alterado com sucesso!");
             }
             else{
                 try {
                     await api.post('socios', dados);
-                    setAtualiza(!atualiza);
                     limpar()
                     alert("Socio cadastrado com sucesso!");
                         
@@ -94,13 +113,14 @@ export default function Socios(){
                 }
 
             }
+            const response = await api.get('socios');
+            setSocios(response.data);
+            
        }
     } 
 
     function handleDelete(id, nome){
-        console.log(id);
         var confirmar = window.confirm(`Deseja deletar o sócio ${nome}?`)
-        console.log(confirmar)
         if(confirmar){
             api.delete(`socios/${id}`);
             setSocios(socios.filter(soc => soc.idSocio !== id))
@@ -126,6 +146,22 @@ export default function Socios(){
                 setLocalTrab(response.data.localTrab);
                 setSexo(response.data.sexo);
         })
+    }
+
+    async function handleSearch(){
+        const pesq = document.getElementById('pesquisar').value;
+        await api.get(`socios?pesquisa=${pesq}`)
+        .then(response => {
+            setSocios(response.data);
+            console.log(response.data)
+        })
+    }
+
+    function enter(e){
+        var tecla = e.key;
+        if(tecla === 'Enter'){
+            handleSearch()
+        }
     }
 
     function limpar(){
@@ -273,12 +309,13 @@ export default function Socios(){
                         <input
                             id="pesquisar"
                             placeholder="Pesquise por nome ou matrícula"
+                            onKeyUp={enter} 
                         >
                         </input>
-                        <FiSearch id="pesquisa" size={20} color=" #505050"/>
+                        <FiSearch id="pesquisa" size={20} color=" #505050" onClick={handleSearch}/>
                     </div>
                     <div  id="tabela">
-                    {socios[1] ? <table>
+                    {socios[0] ? <table>
                             <thead  id="cabecalho">
                                 <tr>
                                     <td></td>
@@ -288,7 +325,7 @@ export default function Socios(){
                             </thead>
                         </table> : ''
                     }
-                            {socios[1] ? socios.map(soc => (
+                            {socios[0] ? paginaSocios.map(soc => (
                                 <div className="tabInfo" key={soc.idSocio}>
                                     <table>
                                         <tbody className="corpo1">
@@ -321,7 +358,7 @@ export default function Socios(){
                                                 style={{display: "none"}}
                                             >
                                                 <td className="dadosocio">{soc.socion==='S' ? "Sim" : "Não"}</td>
-                                                <td className="dadonascimento">{Intl.DateTimeFormat('pt-BR').format(Date.parse(soc.dtNascimento))}</td>
+                                                <td className="dadonascimento">{Intl.DateTimeFormat('pt-BR').format(Date.parse(soc.dtNascimento+"T00:00:00"))}</td>
                                                 <td className="dadoemail">{soc.email}</td>
                                                 <td className="dadocidade">{soc.cidade}</td>
                                                 <td className="dadocep">{soc.cep}</td>
@@ -354,9 +391,23 @@ export default function Socios(){
                                 </div>
                             )) : ''
                         }
+            
                     </div>
-                </div>         
-            </section>
+                    <nav>
+                        <ul className="paginacao">
+                            {
+                                PageNumbers.map(number => (
+                                    <li key={number} >
+                                        <button className="page-item" id={`page${number}`} onClick={() => mudarPagina(number)}>
+                                            {number}
+                                        </button>
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                    </nav>
+                </div>        
+            </section><br/> <br/> <br/> <br/> 
         </div>
     );
 }

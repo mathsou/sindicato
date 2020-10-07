@@ -1,6 +1,5 @@
 const express = require('express');
 const routes = express.Router();
-const connection = require('./database/connection');
 
 const sociosController = require('./controllers/sociosController');
 const agendamentoController = require('./controllers/agendamentoController');
@@ -19,8 +18,10 @@ routes.get('/agendamento/:id', agendamentoController.index);
 routes.get('/eventos', eventosController.index);
 
 routes.delete('/socios/:id', sociosController.delete);
+routes.delete('/agendamento/:id', agendamentoController.delete);
 
 routes.put('/socios', sociosController.update);
+routes.put('/agendamento', agendamentoController.update);
 
 
 module.exports = routes;

@@ -35,5 +35,8 @@ body {
 #root {
     height: 100%;
 }
-
+footer{
+    font-size: 10px;
+    color: rgb(150, 148, 148);
+}
 

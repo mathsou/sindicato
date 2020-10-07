@@ -4,7 +4,7 @@ const crypto = require('crypto');
 module.exports = {
     async index (request, response){
         const {id} = request.params;
-        const {page = 1} = request.query;
+        const {pesquisa} = request.query;
 
         if(id){
             const socio = await connection('socios')
@@ -14,13 +14,23 @@ module.exports = {
 
             return response.json(socio);
         }
+
+        else if(pesquisa){
+            const socios = await connection('socios')
+            .select('*')
+            .where('visivel', '=', '1')
+            .andWhere(function(){
+                this.where('matricula', 'like', `%${pesquisa}%`)
+                .orWhere('nome', 'like', `%${pesquisa}%`)
+            })
+
+            return response.json(socios);
+        }
         
         const socios = await connection('socios')
         .select('*')
         .where('visivel', '=', '1')
-        .orderBy('nome')
-        .limit(15)
-        .offset((page-1)*15);
+        .orderBy('nome');
 
         return response.json(socios)
     },

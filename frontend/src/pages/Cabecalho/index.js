@@ -1,10 +1,13 @@
 import React from 'react';
 import './styles.css';
 
+import logoSindigua from '../../assets/logosindigua.png'
+
 export default function Entrada(){
     return (
         <div className="Cabecalho-container">
-            <h1>SINDICATO</h1>
+            <img src={logoSindigua} alt=""/>
+            <h1>SINDIGUAÍBA</h1>
         </div>
     );
 }
