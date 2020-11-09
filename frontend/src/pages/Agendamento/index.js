@@ -10,6 +10,7 @@ import './styles.css';
 import api from '../../services/api';
 import mask from '../../functions/mascaraDinheiro';
 import Cabecalho from '../Cabecalho';
+import Rodape from '../Rodape';
 import Menu from '../Menu';
 
 Modal.setAppElement('#root');
@@ -388,6 +389,7 @@ export default function Agendamento () {
                     >
                         <h1>CARREGANDO...</h1>
                     </Modal>
+                    <Rodape/>
         </div>
     )
   

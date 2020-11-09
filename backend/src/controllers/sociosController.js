@@ -42,15 +42,15 @@ module.exports = {
             await connection('socios').insert({
                 matricula: data.matricula,
                 socion: data.socion,
-                nome: data.nome,
+                nome: data.nome.toUpperCase(),
                 dtNascimento: data.dtNascimento,
-                email: data.email,
-                cidade: data.cidade,
+                email: data.email.toLowerCase(),
+                cidade: data.cidade.toUpperCase(),
                 cep: data.cep,
                 celular: data.celular,
                 telComercial: data.telComercial,
                 telResidencial: data.telResidencial,
-                localTrab: data.localTrab,
+                localTrab: data.localTrab.toUpperCase(),
                 sexo: data.sexo,
 
             })

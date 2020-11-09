@@ -4,6 +4,7 @@ import {FiSearch, FiPlus, FiEdit, FiTrash2} from 'react-icons/fi';
 
 import api from '../../services/api';
 import Cabecalho from '../Cabecalho';
+import Rodape from '../Rodape';
 import Menu from '../Menu';
 
 export default function Socios(){
@@ -11,7 +12,7 @@ export default function Socios(){
 
     //const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
-    const postsPerPage = 15;
+    const postsPerPage = 10;
 
     const [mostrar, setMostrar] = useState(true);
 
@@ -35,14 +36,8 @@ export default function Socios(){
         const fetchPosts = async () => {
             //setLoading(true);
             const response = await api.get('socios');
-            if(response.data.length){
-                setSocios(response.data);
-            }
-            else{
-                setSocios([response.data]);
-            }
+            setSocios(response.data);
             //setLoading(false);
-            console.log(response.data)
         } 
         fetchPosts();
     }, [])
@@ -315,7 +310,7 @@ export default function Socios(){
                         <FiSearch id="pesquisa" size={20} color=" #505050" onClick={handleSearch}/>
                     </div>
                     <div  id="tabela">
-                    {socios[0] ? <table>
+                    {socios.length===0 ? '' : <table>
                             <thead  id="cabecalho">
                                 <tr>
                                     <td></td>
@@ -323,9 +318,9 @@ export default function Socios(){
                                     <td>Sócio</td>
                                 </tr>
                             </thead>
-                        </table> : ''
+                        </table>
                     }
-                            {socios[0] ? paginaSocios.map(soc => (
+                            {socios===[] ? '' : socios[0] ? paginaSocios.map(soc => (
                                 <div className="tabInfo" key={soc.idSocio}>
                                     <table>
                                         <tbody className="corpo1">
@@ -358,7 +353,7 @@ export default function Socios(){
                                                 style={{display: "none"}}
                                             >
                                                 <td className="dadosocio">{soc.socion==='S' ? "Sim" : "Não"}</td>
-                                                <td className="dadonascimento">{Intl.DateTimeFormat('pt-BR').format(Date.parse(soc.dtNascimento+"T00:00:00"))}</td>
+                                                <td className="dadonascimento">{soc.dtNascimento === null ? '' : Intl.DateTimeFormat('pt-BR').format(Date.parse(soc.dtNascimento+"T00:00:00"))}</td>
                                                 <td className="dadoemail">{soc.email}</td>
                                                 <td className="dadocidade">{soc.cidade}</td>
                                                 <td className="dadocep">{soc.cep}</td>
@@ -395,7 +390,7 @@ export default function Socios(){
                     </div>
                     <nav>
                         <ul className="paginacao">
-                            {
+                            {socios===[] ? '' :
                                 PageNumbers.map(number => (
                                     <li key={number} >
                                         <button className="page-item" id={`page${number}`} onClick={() => mudarPagina(number)}>
@@ -408,6 +403,7 @@ export default function Socios(){
                     </nav>
                 </div>        
             </section><br/> <br/> <br/> <br/> 
+            <Rodape/>
         </div>
     );
 }

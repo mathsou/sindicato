@@ -1,11 +1,10 @@
-/* .Socio-container section {
-    text-align: center;
-} */
-/* .Socio-container section {
+.Socio-container{
+}
+.Socio-container section {
     display: flex;
     align-items: center;
     justify-content: space-between;
-} */
+} 
 .listagemSocios, .formSocio{
     margin-bottom: 20px;
 }
@@ -39,7 +38,6 @@
     width: 40%;
     min-width: 500px;
     max-width: 600px;
-    float: left;
 }
 .Socio-container {
     width: 100%;
@@ -56,9 +54,6 @@
     height: 680px;
     width: 50%;
     min-width: 565px;
-    
-    float: right;
-
 }
 
 .Socio-container section .formSocio input, .select, button {
@@ -273,18 +268,19 @@
 }
 
 .Socio-container section .listagemSocios nav ul li {
-    padding: 12px 1px 0 1px;
+    padding: 5px 1px 0 1px;
     float: left;
 }
 .Socio-container section .listagemSocios nav ul li button{
-    font-size: 20px;
+    font-size: 14px;
     text-decoration: none;
     background-color: transparent;
-    width: 40px;
+    height: 20px;
+    width: 20px;
     color: rgb(13, 71, 109);
     border: 1px solid rgb(85, 85, 85);
     border-radius: 0;
-    padding: 5px 10px 5px 10px;
+    padding: 2px 0px 5px 0px;
 }
 
 .Socio-container section .listagemSocios nav ul li button:hover{

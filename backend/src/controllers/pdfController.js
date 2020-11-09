@@ -5,7 +5,7 @@ const mask = require("../functions/mascaraDinheiro");
 module.exports = {
 	async create(request, response) {
 		const dados = request.body;
-
+		console.log(dados)
 		var dataAtual = new Date();
 		var diaA = dataAtual.getDate();
 		var mesA = dataAtual.getMonth();
@@ -17,17 +17,17 @@ module.exports = {
 		var diaL = dados.data.slice(8,10);
 		var dataL = diaL + '/' + mesL + '/' + anoL;
 
-		var valorTotal = mask.mascaraDinheiro(dados.valorTotal*100)
+		var valorTotal = mask.mascaraDinheiro(dados.valorFinal*100)
 		valorTotal = valorTotal.replace('.', '-');
 		valorTotal = valorTotal.replace(/\,/g, '.');
 		valorTotal = valorTotal.replace('-', ',');
-
-		var valorSinal = mask.mascaraDinheiro(dados.valorSinal*100)
+		console.log(valorTotal)
+		var valorSinal = mask.mascaraDinheiro(dados.valorS*100)
 		valorSinal = valorSinal.replace('.', '-');
 		valorSinal = valorSinal.replace(/\,/g, '.');
 		valorSinal = valorSinal.replace('-', ',');
 
-		var valorRestante = mask.mascaraDinheiro(dados.valorRestante*100)
+		var valorRestante = mask.mascaraDinheiro(dados.valorR*100)
 		valorRestante = valorRestante.replace('.', '-');
 		valorRestante = valorRestante.replace(/\,/g, '.');
 		valorRestante = valorRestante.replace('-', ',');
@@ -70,7 +70,7 @@ module.exports = {
 			<p style="margin: 1px 0;">1.1 – DA DESTINAÇÃO: O espaço ora locado destina-se exclusivamente ao sócio, para fins</p>
 			<p style="margin: 1px 0;">Únicos de evento de natureza familiar e sem fins lucrativos, estando expressamente proibida qualquer outra forma de evento ou subcontratação para terceiros.</p>
 			<p style="margin: 1px 0;"> </p>
-			<p style="margin: 1px 0;">2. Pelo aluguel do salão de eventos, o(a) LOCATÁRIO pagará ao LOCADOR a importância de ${valorTotal} (${valorExtenso.extenso(dados.valorTotal)}). O aluguel será pago em vezes. A primeira parcela de ${valorSinal} no ato de assinatura do contrato e o restante da parcela de ${valorRestante} até a data da retirada as chaves.  Essa parcela deverá ser depositada ou paga na secretaria do sindicato. As chaves serão entregues na sexta-feira antes do evento, até as 16h30mim e deverão ser devolvidas na segunda-feira após o evento.</p>
+			<p style="margin: 1px 0;">2. Pelo aluguel do salão de eventos, o(a) LOCATÁRIO pagará ao LOCADOR a importância de ${valorTotal} (${valorExtenso.extenso(dados.valorFinal)}). O aluguel será pago em vezes. A primeira parcela de ${valorSinal} no ato de assinatura do contrato e o restante da parcela de ${valorRestante} até a data da retirada as chaves.  Essa parcela deverá ser depositada ou paga na secretaria do sindicato. As chaves serão entregues na sexta-feira antes do evento, até as 16h30mim e deverão ser devolvidas na segunda-feira após o evento.</p>
 			<p style="margin: 1px 0;"> </p>
 			<p style="margin: 1px 0;">3. O LOCADOR apresenta ao LOCATÁRIO os “termos de uso de salão”, em anexo – que fica fazendo parte integrante do presente contrato, comprometendo-se o LOCATÁRIO, observar, por si e por seus convidados, as respectivas normas, sob pena de rescisão contratual, com as consequências daí decorrentes.</p>
 			<p style="margin: 1px 0;"> </p>
